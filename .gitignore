@@ -1,0 +1,16 @@
+logs/*
+tb_logger/*
+results/
+experiments/
+pretrain/
+.vscode/
+
+.ipynb_checkpoints/
+*.pyc
+*.tif
+*.jpg
+*.pth
+*.mat
+*.npy
+.DS_Store
+

@@ -1,0 +1,156 @@
+name: LLFormerv2+-UHDBlur-debug
+model_type: ImageRestorationModel
+scale: 1
+num_gpu: 2 # useless when distributed
+manual_seed: 1234
+print_network: false
+find_unused_parameters: True
+
+datasets:
+  train:
+    # name: UHDLOL8k-train
+    # type: PairedImageDataset
+    # dataroot_gt: /mnt/data/shenglong/data/UHD-LOL8k/train/high
+    # dataroot_lq: /mnt/data/shenglong/data/UHD-LOL8k/train/low
+
+    # name: UHDLOL4k-train
+    # type: PairedImageDataset
+    # dataroot_gt: /mnt/data/shenglong/data/UHD-LOL4k/train/high
+    # dataroot_lq: /mnt/data/shenglong/data/UHD-LOL4k/train/low
+
+    name: UHDBlur-train
+    type: PairedImageDataset
+    dataroot_gt: /mnt/data/shenglong/data/UHDBlur/train/gt
+    dataroot_lq: /mnt/data/shenglong/data/UHDBlur/train/input
+
+    # name: 4KRain-train
+    # type: PairedImageDataset
+    # dataroot_gt: /mnt/data/shenglong/data/4K-Rain13k/train/target
+    # dataroot_lq: /mnt/data/shenglong/data/4K-Rain13k/train/input
+
+    filename_tmpl: '{}'
+    io_backend:
+      type: disk
+
+    gt_size: 512
+    use_flip: true
+    use_rot: true
+
+    # data loader
+    use_shuffle: true
+    num_worker_per_gpu: 4
+    batch_size_per_gpu: 4
+    dataset_enlarge_ratio: 1
+    pin_memory: false
+    prefetch_mode: ~
+
+  val:
+    # name: UHDLOL8k-tinytest
+    # type: PairedImageDataset
+    # dataroot_gt: /mnt/data/shenglong/data/UHD-LOL8k-tiny/test/high
+    # dataroot_lq: /mnt/data/shenglong/data/UHD-LOL8k-tiny/test/low
+
+    # name: UHDLOL4k-tinytest
+    # type: PairedImageDataset
+    # dataroot_gt: /mnt/data/shenglong/data/UHD-LOL4k-tiny/test/high
+    # dataroot_lq: /mnt/data/shenglong/data/UHD-LOL4k-tiny/test/low
+
+    name: UHDBlur-test
+    type: PairedImageDataset
+    dataroot_gt: /mnt/data/shenglong/data/UHDBlur/test/gt
+    dataroot_lq: /mnt/data/shenglong/data/UHDBlur/test/input
+
+    # name: 4KRain-test
+    # type: PairedImageDataset
+    # dataroot_gt: /mnt/data/shenglong/data/4K-Rain13k/test/target
+    # dataroot_lq: /mnt/data/shenglong/data/4K-Rain13k/test/input
+
+    io_backend:
+      type: disk
+
+network_g:
+  type: LLFormerv2_plus
+  inp_channels: 3
+  out_channels: 3
+  dim: 16
+  num_enc_blocks: [2,4,4]
+  num_dec_blocks: [4,4,2]
+  num_bottleneck_blocks: 2
+  num_extraction_blocks: 1
+  num_latent_blocks: 1
+  num_refinement_blocks: 2
+  heads: [1,2,4,8,8]
+  num_slots: [64,64,64,64,64]
+  ffn_expansion_factor: 2.66
+  bias: False
+  shortcut: False
+  llm_layer: 18
+
+# path
+path:
+  pretrain_network_g: ~
+  strict_load_g: true
+  resume_state: ~
+
+# training settings
+train:
+  optim_g:
+    type: Adam
+    lr: !!float 5e-4
+    betas: [0.9, 0.999]
+    eps: !!float 1e-8
+
+  scheduler:
+    type: TrueCosineAnnealingLR
+    T_max: 100000
+    eta_min: !!float 1e-7
+
+  # total_iter: 300000
+  total_iter: 100000
+  warmup_iter: -1 # no warm up
+
+  # losses
+  pixel_opt:
+    type: SmoothL1Loss
+    loss_weight: 1
+
+  ssim_opt:
+    type: SSIMLoss
+    loss_weight: !!float 0.1
+
+  fft_opt:
+    type: FFTLoss
+    loss_weight: !!float 0.1
+
+  mixing_augs:
+    mixup: false
+
+  freeze_except_adapter: false
+
+# validation settings
+val:
+  val_freq: !!float 1e4
+  save_img: false
+  padding: true
+  padding_factor: 16
+
+  metrics:
+    psnr: # metric name, can be arbitrary
+      type: calculate_psnr
+      crop_border: 0
+      test_y_channel: false
+      save_best_checkpoint: true
+
+# logging settings
+logger:
+  print_freq: 500
+  save_checkpoint_freq: !!float 1e4
+  use_tb_logger: true
+  wandb:
+    project: ~
+    resume_id: ~
+
+# dist training settings
+dist_params:
+  backend: nccl
+  port: 29500

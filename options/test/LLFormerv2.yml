@@ -1,0 +1,82 @@
+name: LLFormerv2_LOLv1
+model_type: ImageRestorationModel
+scale: 1
+num_gpu: 1  # useless when distributed
+manual_seed: 1234
+print_network: false
+
+datasets:
+  val:
+    name: lol-test
+    type: PairedImageDataset
+    dataroot_gt: /mnt/data/shenglong/data/LOL/eval15/high
+    dataroot_lq: /mnt/data/shenglong/data/LOL/eval15/low
+
+    # name: MIT-5k-test
+    # type: PairedImageDataset
+    # dataroot_gt: /mnt/data/shenglong/data/MIT-Adobe-5K-512/test/high
+    # dataroot_lq: /mnt/data/shenglong/data/MIT-Adobe-5K-512/test/low
+
+    # name: UHD-LOL4K-test
+    # type: PairedImageDataset
+    # dataroot_gt: /mnt/data/shenglong/data/UHD-LOL4k/test/high
+    # dataroot_lq: /mnt/data/shenglong/data/UHD-LOL4k/test/low
+
+    # name: UHD-LOL8K-test
+    # type: PairedImageDataset
+    # dataroot_gt: /mnt/data/shenglong/data/UHD-LOL8k/test/high
+    # dataroot_lq: /mnt/data/shenglong/data/UHD-LOL8k/test/low
+
+    # name: UHDBlur-test
+    # type: PairedImageDataset
+    # dataroot_gt: /mnt/data/shenglong/data/UHDBlur/test/gt
+    # dataroot_lq: /mnt/data/shenglong/data/UHDBlur/test/input
+
+    # name: 4KRain-test
+    # type: PairedImageDataset
+    # dataroot_gt: /mnt/data/shenglong/data/4K-Rain13k/test/target
+    # dataroot_lq: /mnt/data/shenglong/data/4K-Rain13k/test/input
+
+    io_backend:
+      type: disk
+
+network_g:
+  type: LLFormerv2
+  inp_channels: 3
+  out_channels: 3
+  dim: 16
+  num_enc_blocks: [2, 4, 4]
+  num_dec_blocks: [4, 4, 2]
+  num_bottleneck_blocks: 2
+  num_extraction_blocks: 1
+  num_latent_blocks: 1
+  num_refinement_blocks: 2
+  heads: [1, 2, 4, 8, 8]
+  num_slots: [64, 64, 64, 64, 64]
+  ffn_expansion_factor: 2.66
+  bias: False
+  shortcut: False
+
+# path
+path:
+  pretrain_network_g: pretrain/LLFormerv2/LLFormerv2_LOLv1.pth
+  strict_load_g: true
+  resume_state: ~
+
+# validation settings
+val:
+  save_img: true
+  padding: true
+  padding_factor: 16
+
+  metrics:
+    psnr: # metric name, can be arbitrary
+      type: calculate_psnr
+      crop_border: 0
+      test_y_channel: false
+      save_best_checkpoint: true
+
+# dist training settings
+dist_params:
+  backend: nccl
+  port: 29500

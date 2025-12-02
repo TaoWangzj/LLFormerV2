@@ -1,0 +1,9 @@
+einops==0.8.0
+natsort==8.4.0
+opencv-python==4.10.0.84
+pyiqa==0.1.13
+torch==2.4.1
+torchvision==0.19.1
+tqdm==4.67.1
+transformers==4.37.2
+debugpy==1.8.11
