@@ -31,7 +31,7 @@ We create a new large-scale UHD-LLIE dataset called UHDLOL to benchmark the perf
 ## Network Architecture
 ![](figures/LLFormerv2_Architecture.png)
 
-We propose a new transformer-based method for UHD-LLIE. The core design of LLFormer includes an axis-based transformer block and a cross-layer attention fusion block. In the former, axis-based multi-head self-attention performs self-attention on the height and width axis across the channel dimension sequentially to reduce the computational complexity, and a dual gated feed-forward network employs a gated mechanism to focus more on useful features. The cross-layer attention fusion block learns the attention weights of features in different layers when fusing them.
+We propose LLFormer V2, an advanced Transformer-based framework for Ultra-High-Definition Low-Light Image Enhancement (UHD-LLIE). At its core, the model employs a Axis-based Transformer Block V2 (ATB V2), which enhances the original axis-based multi-head self-attention mechanism with a novel clustering-dispatching strategy​ to efficiently fuse local and global features while maintaining computational tractability. The framework also incorporates Illumination Prior Regularization (IPR), a physically-guided module that explicitly embeds multi-scale illumination cues into both the self-attention and feed-forward pathways, enabling more natural illumination recovery and robust color consistency. Furthermore, an extended version named LLFormer V2+​ integrates a frozen pre-trained Large Language Model (LLM) into the bottleneck stage, injecting high-level semantic priors to enhance global contextual reasoning without additional training overhead.
 ## Quantitative results
 ### Results on UHD-LOL
 ![](figures/UHDLOL.png)
