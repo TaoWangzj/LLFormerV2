@@ -101,38 +101,23 @@ if __name__ == '__main__':
     parser.add_argument("--gt", action='store_true', help='use gt mean')
     args = parser.parse_args()
 
-    device = torch.device('cuda:7')
+    device = torch.device('cuda:0')
 
-    im_dir = 'results/LLFormerv2_LOLv1/visualization/lol-test/*.png'
-    label_dir = '/mnt/data/shenglong/data/LOL/eval15/high/'
-
-    # im_dir = 'results/LLFormerv2+_MIT5K/visualization/MIT-5k-test/*.png'
-    # label_dir = '/mnt/data/shenglong/data/MIT-Adobe-5K-512/test/high/'
-
-    # im_dir = 'results/LLFormerv2+_UHDLOL4K/visualization/UHD-LOL4k-test/*.png'
-    # label_dir = '/mnt/data/shenglong/data/UHD-LOL4k/test/high/'
-
-    # im_dir = 'results/LLFormerv2_UHDLOL8K/visualization/UHD-LOL8K-test/*.png'
-    # label_dir = '/mnt/data/shenglong/data/UHD-LOL8k/test/high'
-
-    # im_dir = 'results/LLFormerv2+_UHDBlur/visualization/UHDBlur-test/*.png'
-    # label_dir = '/mnt/data/shenglong/data/UHDBlur/test/gt/'
-
-    # im_dir = 'results/LLFormerv2+_4KRain/visualization/4KRain-test/*.png'
-    # label_dir = '/mnt/data/shenglong/data/4K-Rain13k/test/target/'
+    test_result = 'results/LLFormerv2_LOLv1/visualization/lol-test/*.png'
+    gt = '/mnt/data/shenglong/data/LOL/eval15/high/'
 
     use_GT_mean = args.gt
     use_y_channel = args.y
     save_output = args.save
 
-    avg_psnr, avg_ssim, avg_lpips, avg_mae = metrics(im_dir, label_dir, use_GT_mean, use_y_channel, device)
+    avg_psnr, avg_ssim, avg_lpips, avg_mae = metrics(test_result, gt, use_GT_mean, use_y_channel, device)
     print("===> Avg.PSNR: {:.4f} dB ".format(avg_psnr))
     print("===> Avg.SSIM: {:.4f} ".format(avg_ssim))
     print("===> Avg.LPIPS: {:.4f} ".format(avg_lpips))
     print("===> Avg.MAE: {:.4f} ".format(avg_mae))
 
     # output metrics to json file
-    im_list = im_dir.split('/')
+    im_list = test_result.split('/')
     if save_output:
         if use_GT_mean:
             file = "metric_gt_mean.json"

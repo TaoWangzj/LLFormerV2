@@ -76,10 +76,8 @@ We provide the pre-trained models under different datasets:
 
 - LLFormerv2+ [Google drive | [Baidu drive](https://pan.baidu.com/s/1LAmXyT0MfOwOK9iHp_ajnw?pwd=pf12)].
 
-<!-- ### Visual comparison results
-We provide the visual results of all existing methods in Table 2 on LOL and MIT-Adobe FiveK datasets
-- Visual results on LOL dataset [[OneDrive](https://mailnwpueducn-my.sharepoint.com/:f:/g/personal/2018302756_mail_nwpu_edu_cn/ErK1fyhDJshKrLefzsJ92-IBUBk_hUCJORj7bcupJG6zIg?e=hTrWuP) | [Baidu drive](https://pan.baidu.com/s/1NjdWo1j33mxTJV7rLe1zPA?pwd=awbm)].
-- Visual results on MIT-Adobe FiveK dataset [[OneDrive](https://mailnwpueducn-my.sharepoint.com/:f:/g/personal/2018302756_mail_nwpu_edu_cn/EkJoZREY-dRCp36UrzOqtPMBoU5d3wM5ka1NLZ7N-12a-g?e=BBgQtX) | [Baidu drive](https://pan.baidu.com/s/1BkDHPwTml1IB5ZVbiPMoRw?pwd=o54t)]. -->
+### Visual comparison results
+We provide the compared visual results. You can download from [[Baidu drive]](https://pan.baidu.com/s/1epdUOJ5ltFpQPeQdi3WJUQ?pwd=9bsb).
 
 ### Test
 You can directly test the pre-trained model as follows
@@ -88,6 +86,16 @@ You can directly test the pre-trained model as follows
 ```bash
 sh test.sh
 ```
+
+To calculate metrics for the test results
+- Modify the data path `input` and `gt` in `measure.py` to the path of the test results and ground truth images, respectively. Then run
+```bash
+# test on rgb channel
+python measure.py
+# test on y channel
+python measure.py --y
+```
+
 
 ### Train
 
