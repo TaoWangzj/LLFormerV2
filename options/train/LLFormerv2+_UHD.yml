@@ -1,4 +1,4 @@
-name: LLFormerv2+-UHDBlur-debug
+name: LLFormerv2+-UHDBlur
 model_type: ImageRestorationModel
 scale: 1
 num_gpu: 2 # useless when distributed

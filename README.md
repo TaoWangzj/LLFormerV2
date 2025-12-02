@@ -48,15 +48,16 @@ We propose a new transformer-based method for UHD-LLIE. The core design of LLFor
 
 ## Get Started
 ### Dependencies and Installation
-1. Create Conda Environment
+1. Clone Repo
+```bash
+git clone https://github.com/TaoWangzj/LLFormerV2.git
+cd LLFormerv2
 ```
+2. Create Conda Environment
+```bash
 conda create -n LLFormerv2 python=3.8
 conda activate LLFormerv2
 pip install -r requirements.txt
-```
-2. Clone Repo
-```
-git clone https://github.com/TaoWangzj/LLFormer.git
 ```
 
 ### Dataset
@@ -80,53 +81,32 @@ We provide the visual results of all existing methods in Table 2 on LOL and MIT-
 - Visual results on LOL dataset [[OneDrive](https://mailnwpueducn-my.sharepoint.com/:f:/g/personal/2018302756_mail_nwpu_edu_cn/ErK1fyhDJshKrLefzsJ92-IBUBk_hUCJORj7bcupJG6zIg?e=hTrWuP) | [Baidu drive](https://pan.baidu.com/s/1NjdWo1j33mxTJV7rLe1zPA?pwd=awbm)].
 - Visual results on MIT-Adobe FiveK dataset [[OneDrive](https://mailnwpueducn-my.sharepoint.com/:f:/g/personal/2018302756_mail_nwpu_edu_cn/EkJoZREY-dRCp36UrzOqtPMBoU5d3wM5ka1NLZ7N-12a-g?e=BBgQtX) | [Baidu drive](https://pan.baidu.com/s/1BkDHPwTml1IB5ZVbiPMoRw?pwd=o54t)]. -->
 
-
-
 ### Test
 You can directly test the pre-trained model as follows
-
-1. Modify the paths to dataset and pre-trained mode.
-```python
-# Tesing parameter
-input_dir # the path of data
-result_dir # the save path of results
-weights # the weight path of the pre-trained model
-```
-
-2. Test the models for LOL and MIT-Adobe FiveK dataset
-
-You need to specify the data path ```input_dir```, ```result_dir```, and model path ```weight_path```. Then run
+- Modify the `--option` in `test.sh` to `options/test/LLFormerv2.yml` or `options/test/LLFormerv2+.yml`, depending on the model you want to test.
+- Specify the data path ```dataroot_gt```, ```dataroot_lq```, and model path ```pretrain_network_g``` in corresponding config files. Then run
 ```bash
-python test.py --input_dir your_data_path --result_dir your_save_path --weights weight_path
-
+sh test.sh
 ```
-
-3. Test the models for UHD-LOL dataset
-
-You need to specify the data path ```input_dir```, ```result_dir```, and model path ```weight_path```. Then run
-```bash
-python test_UHD.py --input_dir your_data_path --result_dir your_save_path --weights weight_path
-
-```
-(Due to GPU memory limitation, we suggest the users to test with patch-based mode for UHD images)
 
 ### Train
 
-1. To download UHD-LOL training and testing data
+1. To download training and testing datasets
 
-
-2. Generate image patches from full-resolution training images of UHD-LOL dataset
-
-```
-python scripts/extract_subimages_UHD.py
-```
-
-3. To train LLFormer, run
+2. Train the model for non-UHD datasets (LOL and MIT-Adobe FiveK)
+- Modify the `--option` in `train.sh` to `options/train/LLFormerv2.yml` or `options/train/LLFormerv2+.yml`, depending on the model you want to train.
+- Change `--nproc_per_node` in `train.sh` to the number of GPUs you want use (default is 1).
+- Specify the data path in corresponding config files. Then run
 ```bash
-python train.py -yml_path your_config_path
+sh train.sh
 ```
-```
-You need to modify the config for your own training environment
+
+3. Train the model for UHD dataset (UHD-LOL4K, UHD-LOL8K, UHDBlur, 4K-Rain13k)
+- Modify the `--option` in `train.sh` to `options/train/LLFormerv2_UHD.yml` or `options/train/LLFormerv2+_UHD.yml`, depending on the model you want to train.
+- Change `--nproc_per_node` in `train.sh` to the number of GPUs you want use (default is 2).
+- Specify the data path in corresponding config files. Then run
+```bash
+sh train.sh
 ```
 
 
