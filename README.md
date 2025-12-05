@@ -1,33 +1,21 @@
 ## LLFormer V2: Illumination-Aware Transformer with Semantic Fusion for UHD Low-Light Image Enhancement and Beyond
 
-
-[Tao Wang](https://scholar.google.com/citations?user=TsDufoMAAAAJ&hl=en), Shenglong Hechen, [Bjorn Stenger](https://scholar.google.com/citations?user=plhjgHUAAAAJ&hl=en), [Tong Lu](https://cs.nju.edu.cn/lutong/index.htm), [Kaihao Zhang](https://scholar.google.com/citations?user=eqwDXdMAAAAJ&hl=en)
-
-[![paper](https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg)](https://arxiv.org/pdf/2212.11548.pdf)
-<!-- [![supplement](https://img.shields.io/badge/Supplementary-Material-red)](https://arxiv.org/pdf/2212.11548.pdf)
-[![video](https://img.shields.io/badge/Video-Presentation-F9D371)](https://arxiv.org/pdf/2212.11548.pdf)
-[![slides](https://img.shields.io/badge/Presentation-Slides-B762C1)](https://arxiv.org/pdf/2212.11548.pdf)
-[![Summary](https://img.shields.io/badge/Summary-Slide-87CEEB)](https://arxiv.org/pdf/2212.11548.pdf) -->
-
 >**Abstract:** With the proliferation of ultra-high-definition (UHD) imaging devices, low-light image enhancement (LLIE) faces new challenges in both visual fidelity and computational efficiency. In this work, we introduce a large-scale UHD-LLIE benchmark, UHD-LOL, containing paired 4K and 8K low-light and reference images, and systematically evaluate existing LLIE algorithms under UHD settings. Building upon this benchmark, we propose LLFormer V2, a physically guided Transformer architecture that incorporates Illumination Prior Regularization (IPR) to explicitly embed multi-scale illumination cues into both the self-attention and feed-forward pathways. This physically informed design allows the model to disentangle illumination from reflectance, resulting in natural brightness recovery, robust color constancy, and improved perceptual consistency. To further enhance efficiency and representational power, we redesign the Axis-based Transformer Block into ATB V2, which employs a clustering–dispatching mechanism to adaptively fuse local and global features while maintaining computational tractability. Furthermore, we extend the framework to LLFormer V2-T, integrating high-level semantic priors from a frozen pre-trained Large Language Model (LLM) into the bottleneck to facilitate global contextual reasoning. Experimental results across diverse benchmarks demonstrate that the LLFormer V2 series achieve state-of-the-art performance in multiple tasks, such as UHD low-light image enhancement, UHD image deblurring, and UHD image deraining.
 
-<!-- #### News
-- **Jan 11, 2023:** Our paper is selected for an ORAL presentation at AAAI 2023
-- **Dec 24, 2022:** Pre-trained models are released!
-- **Dec 23, 2022:** Codes is released!
-- **Dec 23, 2022:** Homepage is released! -->
+#### News
+- **Dec 05, 2025:** Pre-trained models are released!
+- **Dec 05, 2025:** Codes is released!
 
-<!-- This repository contains the dataset, code and pre-trained models for our paper. Please refer to our [project page](https://taowangzj.github.io/projects/LLFormer/) for a quick project overview. -->
 
 ## UHDLOL Benchmark for Image Enhancement
 ![](figures/benchmark.png)
 
 We create a new large-scale UHD-LLIE dataset called UHDLOL to benchmark the performance of existing LLIE methods and explore the UHD-LLIE problem. It consists of two subsets: UHD-LOL4K and UHD-LOL8K. The UHD-LOL4K subset contains 8, 099 pairs of 4K low-light/normal-light images. Among them, 5, 999 pairs of images are used for training and 2, 100 for testing. The UHD-LOL8K subset includes 2, 966 pairs of 8K low-light/normal-light images, which are split into 2, 029 pairs for training and 937 for testing.
-<!-- Please refer to to our [project page](https://taowangzj.github.io/projects/LLFormer/) for more detail. -->
+
 ## Network Architecture
 ![](figures/LLFormerv2_Architecture.png)
 
-We propose LLFormer V2, an advanced Transformer-based framework for Ultra-High-Definition Low-Light Image Enhancement (UHD-LLIE). At its core, the model employs a Axis-based Transformer Block V2 (ATB V2), which enhances the original axis-based multi-head self-attention mechanism with a novel clustering-dispatching strategy​ to efficiently fuse local and global features while maintaining computational tractability. The framework also incorporates Illumination Prior Regularization (IPR), a physically-guided module that explicitly embeds multi-scale illumination cues into both the self-attention and feed-forward pathways, enabling more natural illumination recovery and robust color consistency. Furthermore, an extended version named LLFormer V2-T integrates a frozen pre-trained Large Language Model (LLM) into the bottleneck stage, injecting high-level semantic priors to enhance global contextual reasoning without additional training overhead.
+We propose LLFormer V2, an advanced Transformer-based framework for Ultra-High-Definition Low-Light Image Enhancement. At its core, the model employs a Axis-based Transformer Block V2, which enhances the original axis-based multi-head self-attention mechanism with a novel clustering-dispatching strategy​ to efficiently fuse local and global features while maintaining computational tractability. The framework also incorporates Illumination Prior Regularization, a physically-guided module that explicitly embeds multi-scale illumination cues into both the self-attention and feed-forward pathways, enabling more natural illumination recovery and robust color consistency. Furthermore, an extended version named LLFormer V2-T integrates a frozen pre-trained Large Language Model (LLM) into the bottleneck stage, injecting high-level semantic priors to enhance global contextual reasoning without additional training overhead.
 ## Quantitative results
 ### Results on UHD-LOL
 ![](figures/UHDLOL.png)
