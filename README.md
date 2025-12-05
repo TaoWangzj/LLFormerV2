@@ -87,16 +87,16 @@ python measure.py --y
 
 2. Train the model for non-UHD datasets (LOL and MIT-Adobe FiveK)
 - Modify the `--option` in `train.sh` to `options/train/LLFormerv2.yml` or `options/train/LLFormerv2+.yml`, depending on the model you want to train.
-- Change `--nproc_per_node` in `train.sh` to the number of GPUs you want use (default is 1).
-- Specify the data path in corresponding config files. Then run
+- Change `--nproc_per_node` in `train.sh` to the number of GPUs you want to use (default is 1).
+- Specify the data path in the corresponding config files. Then run
 ```bash
 sh train.sh
 ```
 
 3. Train the model for UHD dataset (UHD-LOL4K, UHD-LOL8K, UHDBlur, 4K-Rain13k)
 - Modify the `--option` in `train.sh` to `options/train/LLFormerv2_UHD.yml` or `options/train/LLFormerv2+_UHD.yml`, depending on the model you want to train.
-- Change `--nproc_per_node` in `train.sh` to the number of GPUs you want use (default is 2).
-- Specify the data path in corresponding config files. Then run
+- Change `--nproc_per_node` in `train.sh` to the number of GPUs you want to use (default is 2).
+- Specify the data path in the corresponding config files. Then run
 ```bash
 sh train.sh
 ```
@@ -134,9 +134,9 @@ If you have any questions, please contact taowangzj@gmail.com
 
 
 ## Our Related Works
+- Ultra-High-Definition Low-Light Image Enhancement: A Benchmark and Transformer-Based Method, AAAI 2023. [Paper](https://arxiv.org/pdf/2212.11548.pdf) | [Code](https://github.com/TaoWangzj/LLFormer)
 - Benchmarking Ultra-High-Definition Image Super-resolution, ICCV 2021. [Paper](https://openaccess.thecvf.com/content/ICCV2021/papers/Zhang_Benchmarking_Ultra-High-Definition_Image_Super-Resolution_ICCV_2021_paper.pdf) | [Code](https://github.com/HDCVLab/UHD4K_UHD8K)
 - MC-Blur: A Comprehensive Benchmark for Image Deblurring, arXiv 2022. [Paper](https://arxiv.org/pdf/2112.00234.pdf) | [Code](https://github.com/HDCVLab/MC-Blur-Dataset)
-- Ultra-High-Definition Low-Light Image Enhancement: A Benchmark and Transformer-Based Method, AAAI 2023. [Paper](https://arxiv.org/pdf/2212.11548.pdf) | [Code](https://github.com/TaoWangzj/LLFormer)
 ---
 
 ## Reference Repositories
