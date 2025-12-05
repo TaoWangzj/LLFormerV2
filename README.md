@@ -145,6 +145,11 @@ This implementation is based on / inspired by:
 - Restormer: https://github.com/swz30/Restormer
 - LLFlow: https://github.com/wyf0912/LLFlow
 - BasicSR: https://github.com/XPixelGroup/BasicSR
-<!-- - MambaLLIE: https://github.com/wengjiangwei/MambaLLIE
-- GLMix: https://github.com/rayleizhu/GLMix -->
 
+<details>
+<summary>statistics</summary>
+
+![visitors](https://visitor-badge.laobi.icu/badge?page_id=TaoWangzj/LLFormerV2)
+
+
+</details>
