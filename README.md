@@ -56,9 +56,9 @@ You can use the following links to download the datasets
 
 ### Pretrained Model
 We provide the pre-trained models under different datasets:
-- LLFormerv2 [Google drive | [Baidu drive](https://pan.baidu.com/s/1-sCNq_nhk1wnt9EGehVs8A?pwd=bw24)].
+- LLFormerv2 [[Baidu drive](https://pan.baidu.com/s/1-sCNq_nhk1wnt9EGehVs8A?pwd=bw24)].
 
-- LLFormerV2-T [Google drive | [Baidu drive](https://pan.baidu.com/s/1LAmXyT0MfOwOK9iHp_ajnw?pwd=pf12)].
+- LLFormerV2-T [[Baidu drive](https://pan.baidu.com/s/1LAmXyT0MfOwOK9iHp_ajnw?pwd=pf12)].
 
 ### Visual comparison results
 We provide the compared visual results. You can download from [[Baidu drive]](https://pan.baidu.com/s/1epdUOJ5ltFpQPeQdi3WJUQ?pwd=9bsb).
